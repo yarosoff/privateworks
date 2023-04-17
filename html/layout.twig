@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="{{site['language']}}">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page['title'] }}</title>
+  <meta name="keywords" content="{{ site['seo_key'] }}">
+  <meta name="description" content="{{ site['seo_desc'] }}">
+  {% if site['favicon'] %}
+    <link rel="shortcut icon" type="image/ico" href="{{ site['favicon'] }}" />
+  {% endif %}
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  {{ site['custom_header'] }}
+	<link rel="stylesheet" href="https://cdn.smmspot.net/sites/smmspot/assets/knd/knd.controller.css">
+  {% for style in site['styles'] %}
+    <link rel="stylesheet" type="text/css" href="{{ style['href'] }}">
+  {% endfor %}
+    <link href="https://fonts.googleapis.com/css?family=Overpass+Mono:400,700" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  
+  {% if user['auth'] %}
+  <style>
+    /* Light Mode */
+    body.light-mode{
+      background: rgb(245 224 255);
+      color: rgb(50 37 57);
+    }
+
+    body.light-mode .app{
+      color: rgb(50 37 57);
+    }
+
+    body.light-mode .app .app-header.active{
+      background: rgb(245 224 255);
+    }
+
+    body.light-mode .pg-titlte, body.light-mode .pg-text{
+      color: #242731;
+    }
+
+    body.light-mode .top-card .cnb-circle {
+        background: linear-gradient(45deg, rgb(142 9 210), rgb(153 54 204));
+        color: #fff;
+    }
+
+    body.light-mode .card {
+        background: rgb(255 255 255);
+        border-radius: 10px;
+        border: 2px solid rgb(142 9 210 / 15%);
+        box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+    }
+    
+    body.light-mode .card.afip-card:hover .card-body div {
+        color: #fff !important;
+    }
+
+    body.light-mode .app .app-sidebar{
+      background: #8E09D2 !important;
+    }
+
+    body.light-mode .app .app-sidebar .sidebar-logo-cont {
+        filter: brightness(0) invert(1);
+    }
+
+    body.light-mode .app .app-sidebar .sidebar-menu li a{
+      color: #ffffff99;
+    }
+
+    body.light-mode .app .app-sidebar .sidebar-menu li.active a {
+        color: #fff !important;
+        background: #ffffff40 !important;
+        border-color: #a211eb;
+    }
+    
+    body.light-mode .fg{
+      background: #f5e0ff;
+      border: 1px solid #1e202842;
+    }
+    
+    body.light-mode .fla {
+      font-weight: 600;
+      font-size: 16px;
+      color: #23252e;
+    }
+    
+    body.light-mode .fg-control{
+      background: #f5e0ff;
+      color: #23252e;
+    }
+    
+    body.light-mode .dp-service-text, body.light-mode .form-group .form-control {
+      background: #f5e0ff !important;
+      border: 1px solid #23252e10;
+      color: #23252e;
+    }
+    
+    body.light-mode .dp-service-text {
+      background: #f5e0ff !important;
+      border: 1px solid #23252e10;
+    }
+    
+    body.light-mode .top-card h2, body.light-mode .top-card h3 {
+        text-align: left;
+        color: #242731;
+    }
+    
+    body.light-mode .nav-custom .nav-item .nav-link{
+      color: #242731;
+      background: transparent !important;
+    }
+    
+    body.light-mode .nav-custom .nav-item .nav-link::before{
+      background: #ffffffeb;
+    }
+    
+    body.light-mode .nav-custom .nav-item .nav-link.active::before {
+        background: #8E09D2;
+    }
+    
+    body.light-mode .top-card.cntctcard.br {
+        margin: 6px 0;
+        background: #f5e0ff;
+        border: 1px solid #23252e10;
+        border-radius: 10px;
+        padding: 8px;
+    }
+    
+    body.light-mode .top-card.cntctcard.br h2, body.light-mode .top-card.cntctcard.br h3{
+      color: #23252e;
+    }
+    
+    body.light-mode .card-order .coh-icon{
+      color: #fff;
+    }
+    
+    body.light-mode .card-order .co-part .co-text{
+      color: #23252e;
+    }
+    
+    body.light-mode .card-order .co-hidden{
+      border-top: 1px solid #2b2e3820;
+    }
+    
+    body.light-mode .card-order .co-hidden .chid-item{
+      background: #f5e0ff;
+      border-radius: 10px;
+      border: 1px solid #2b2e3810;
+    }
+    
+    body.light-mode .card-order .co-hidden .coh-details .coh-m-title{
+      color: #23252e;
+    }
+    
+    body.light-mode tr.catetitle td{
+      color: #1e2028;
+    }
+    
+    body.light-mode tr.headin {
+      background: #1e2028;
+      color: #ffffff;
+    }
+    
+    body.light-mode tr {
+      background: #ffffff;
+      color: #1e2028;
+      border-color: #00000020;
+    }
+    
+    body.light-mode .old-payments .op-title, body.light-mode .old-payments .op-date, body.light-mode .old-tickets .op-title, body.light-mode .old-tickets .op-date, body.light-mode .afip-username, body.light-mode .afip-box .afip-text, body.light-mode .card.afip-card .card-body .c-title, body.light-mode .card.afip-card .card-body .c-num{
+      color: #1e2028;
+    }
+    
+    body.light-mode .afip-box, body.light-mode .card-afip-body + .card-afip-body{
+      border-color: #2b2e3820;
+    }
+    
+    body.light-mode .top-card.br, body.light-mode .usp-top{
+      border-color: #2b2e3820;
+    }
+    
+    body.light-mode .t-head p{
+      color: #fff;
+    }
+    
+    body.light-mode .nav-custom .nav-item .nav-link{
+      color: #fff;
+    }
+    
+    body.light-mode .darkxt.nav-custom .nav-item .nav-link{
+      color: #23252e;
+    }
+    
+    body.light-mode .ticket-message-block .ticket-msg-container .ticket-msg, body.light-mode .support-chat .schat-left-header p{
+      color: #fff;
+    }
+    
+    body.light-mode .nav-custom.termnav .nav-item .nav-link {
+      color: #1f2029 !important;
+    }
+    
+    body.light-mode .card.afcard .cnb-circle{
+      background: linear-gradient(45deg, #00000078, #00000047);
+    }
+    
+    body.light-mode .ticket-message-block .ticket-msg-container .date-time {
+      color: #000000;
+    }
+    
+    body.light-mode small.help-block.min-max{
+      background: linear-gradient(45deg, #00000010, #00000020);
+    }
+    
+    @media (max-width: 575.98px){
+      body.light-mode .nav-custom.termnav .nav-item .nav-link {
+        color: #1f2029 !important;
+        background: #00000020 !important;
+      }						
+    }
+  </style>
+  {% else %}
+  <style>
+    header#smmspot-na-header.sticky .header-menu li{
+      padding: 20px 30px;
+    }
+    
+    header#smmspot-na-header.sticky .header-menu li.menu-item-btn{
+      padding: 0px 22px;
+    }
+    
+    header#smmspot-na-header .header-menu li::after{
+      left: 20px;
+    }
+    
+    header#smmspot-na-header.sticky .header-menu li::after{
+      left: 50px;
+    }
+  </style>
+  {% endif %}
+  
+</head>
+<body>
+{% if user['auth'] %}
+    <div class="app">
+        <div class="app-header">
+            <div class="app-header-container">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-auto">
+                            <button class="btn ahbtn bs-1" onclick="sidebarToggle()">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                        </div>
+                        <div class="col">
+							<div class="d-head">
+								<div class="container-fluid" id="ptcReal">
+									<div id="ptc" class="page-title-content">
+										<h2 class="pg-titlte">👋 Welcome, <span class="p-color">{{user['username']}}</span>!</h2>
+										<div class="pg-text">Our main concern is you</div>
+									</div>
+								</div>
+							</div>
+                        </div>
+                      	<div class="col-auto">
+                          <div onclick="fundNavtog()">
+                            <a href="javascript:void(0);" onclick="fundToggle()" class="btn ahbtn bs-2 balnav" id="navfund">
+                                <i class="fad fa-money-bill"></i>
+                                  <span class="visib">{{user['balance_formatted']}} <i class="fad fa-eye-slash"></i></span>
+                                  <span class="hid">****** <i class="fad fa-eye"></i></span>
+                            </a>
+                          </div>
+                        </div>
+                        <div class="col-auto">
+                            <a href="/account" class="btn ahbtn bs-2">
+                                <i class="fas fa-user-circle"></i>
+                            </a>
+                        </div>
+                        <!-- <div class="col-auto">
+                            <button class="btn ahbtn bs-2" onclick="rightMenuToggle()">
+                                <i class="far fa-bell"></i>
+                            </button>
+                        </div> -->
+                        <div class="col-auto">
+                            <a href="/logout" class="btn ahbtn bs-3">
+                                <i class="fas fa-power-off"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- ./app-header-container -->
+        </div><!-- ./app-header -->
+        <div class="app-sidebar">
+            <div class="sidebar-header">
+				<a class="sidebar-logo-cont" href="{{ page_url('index') }}">
+				  {% if site['logo'] %}
+					<img src="{{ site['logo'] }}" class="sidebar-big-logo" alt="{{ site['name'] }}" title="{{ site['name'] }}">
+				  {% else %}
+					{{ site['name'] }}
+				  {% endif %}
+				</a>
+              	<button class="btn ahbtn bs-1 mb-4 btn-block btn-sb-close" onclick="javascript:sidebarToggle();">
+                  <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-body">
+					<ul class="sidebar-menu">
+                        <!--<div onclick="fundNavtog()">
+                          <li id="fund" class="menu-link" onclick="fundToggle()">
+                            <div class="profpic">
+                              <img src="https://i.imgur.com/QoZgA25.png">
+                            </div>
+                            <div class="profdet">
+                              <h3>{{user['username']}}</h3>
+                              <div>
+                                <span class="headsbbal"><i class="fad fa-money-bill"></i></span>
+                                <span class="visib"><big>{{user['balance_formatted']}}</big><i class="fad fa-eye-slash"></i></span>
+                                <span class="hid"><big>******</big> <i class="fad fa-eye"></i></span>
+                              </div>
+                            </div>
+                          </li>
+                        </div>-->
+						{% for menu in site['menu'] %}
+							<li{% if menu['active'] %} class="menu-link active" {% else %} class="menu-link" {% endif %}>
+								<a href="{{ menu['link'] }}" class="menu-link" {% if menu['active'] %}  {% endif %}  {% if menu['external'] %} target="_blank" {% endif %}>
+									{% if menu['link'] == '/' %}
+									<div class="menu-icon">
+										<i class="far fa-box-heart"></i>
+									</div>
+									{% elseif menu['link'] == '/services' %}
+									<div class="menu-icon">
+										<i class="far fa-hand-holding-heart"></i>
+									</div>
+                                  	{% elseif menu['link'] == '/dashboard' %}
+									<div class="menu-icon">
+										<i class="far fa-chart-bar"></i>
+									</div>
+									{% elseif menu['link'] == '/orders' %}
+									<div class="menu-icon">
+										<i class="far fa-box-check"></i>
+									</div>
+									{% elseif menu['link'] == '/addfunds' %}
+									<div class="menu-icon">
+										<i class="far fa-donate"></i>
+									</div>
+									{% elseif menu['link'] == '/tickets' %}
+									<div class="menu-icon">
+										<i class="far fa-user-headset"></i>
+									</div>
+									{% elseif menu['link'] == '/affiliates' %}
+									<div class="menu-icon">
+										<i class="far fa-bullseye"></i>
+									</div>
+									{% elseif menu['link'] == '/child-panel' %}
+									<div class="menu-icon">
+										<i class="far fa-store"></i>
+									</div>
+									{% elseif menu['link'] == '/api' %}
+									<div class="menu-icon">
+										<i class="far fa-dice-d20"></i>
+									</div>
+									{% elseif menu['link'] == '/terms' %}
+									<div class="menu-icon">
+										<i class="far fa-scroll-old"></i>
+									</div>
+									{% elseif menu['link'] == '/faq' %}
+									<div class="menu-icon">
+										<i class="far fa-question-circle"></i>
+									</div>
+								    {% elseif menu['link'] == '/drip-feed' %}
+									<div class="menu-icon">
+										<i class="far fa-stopwatch"></i>
+									</div>
+									{% elseif menu['link'] == '/subscriptions' %}
+									<div class="menu-icon">
+										<i class="far fa-box-check"></i>
+									</div>
+									{% elseif menu['link'] == '/massorder' %}
+									<div class="menu-icon">
+										<i class="far fa-inbox-out"></i>
+									</div>
+									{% elseif menu['link'] == '/refill' %}
+									<div class="menu-icon">
+										<i class="far fa-sync-alt"></i>
+									</div>                             
+									{%  endif %}
+								  <span>{{ menu['name'] }}</span>
+								</a>
+							</li>
+						{% endfor %} 
+					</ul>
+                </div>
+            </div>
+          	<div class="sidebar-footer">
+                <a class="lightbulb" href="javascript:void(0)" onclick="themeToggle()"><i class="fad fa-lightbulb"></i></a>
+            </div>
+        </div>
+{% else %}
+
+    <header id="smmspot-na-header" class="sticky-header">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-auto">
+                  <a href="/#">
+                  {% if site['logo'] %}
+                    <img src="{{ site['logo'] }}" alt="{{ site['name'] }}" width="190" title="{{ site['name'] }}">
+                  {% else %}
+                    {{ site['name'] }}
+                  {% endif %}
+                  </a>
+                </div>
+                <div class="col-auto ms-auto justify-self-end col-menu">
+                    <ul class="header-menu">
+						{% for menu in site['menu'] %}
+                        <li {% if menu['active'] %} class="active" {% endif %}>
+                            <a class="menu-link" href="{{ menu['link'] }}">
+                              {% if menu['icon'] %}
+                              <i class="navbar-icon {{ menu['icon'] }}"></i>
+							  {% endif %}
+                              {{ menu['name'] }}
+                          </a>
+                        </li>
+						{% endfor %}
+                      
+                        <li class="menu-item-btn">
+                            <a href="/signup" class="btn btn-primary btn-border">
+                                <div class="mb-text"><i class="signupiconout fas fa-user-lock"></i> {{ lang('signup.title') }}</div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-auto justify-self-end ms-auto col-menu-btn">
+                    <button class="btn ahbtn bs-1 my-4 noAuthMenuBtn">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header><!-- smmspot-header -->
+  
+{% endif %}
+
+<!-- Main variables *content* -->
+{{ content }}
+
+{{ site['custom_footer'] }}
+  
+    
+
+  
+{% if user['auth'] %}
+  
+       <div class="app-rightbar sticky-header">
+            <div class="app-rightbar-header">
+                <div class="pt-5 pb-4 px-4">
+                    <div class="row align-items-center">
+                        <div class="col">
+                            <h3 class="rm-title">Quick Menu</h3>
+                        </div>
+                        <div class="col-auto">
+                            <button class="btn ahbtn bs-3" onclick="javascript:rightMenuToggle();">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+			
+            <div class="app-rb-content">
+                <div class="app-rb-body">
+				
+                <div class="app-rh-nav mt-4 pt-1 mb-4">
+                    <ul class="nav nav-tabs nav-custom" role="tablist">
+                        <li class="nav-item active">
+                            <button class="nav-link active" id="nav-updatesR-tab" data-bs-toggle="tab" data-bs-target="#nav-updatesR" type="button" role="tab" aria-controls="nav-updatesR" aria-selected="true">Updates</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" aria-current="page" id="nav-newsR-tab" data-bs-toggle="tab" data-bs-target="#nav-newsR" type="button" role="tab" aria-controls="nav-newsR" aria-selected="false">Announcements</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" id="nav-sssR-tab" data-bs-toggle="tab" data-bs-target="#nav-sssR" type="button" role="tab" aria-controls="nav-sssR" aria-selected="false">FAQ</button>
+                        </li>
+                    </ul>
+                </div>
+				
+                    <div class="tab-content" id="nav-tabContent">
+					
+					
+                        <div class="tab-pane fade show active" id="nav-updatesR" role="tabpanel" aria-labelledby="nav-updatesR-tab">
+
+							<div class="card card-updates can-up">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<span>Price Increased</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">YouTube Views (S)</h2>
+									</div>
+								</div>
+							</div><!-- ./card-updates -->
+							
+							<div class="card card-updates can-down">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<span>Price Decrased</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">YouTube Views (S)</h2>
+									</div>
+								</div>
+							</div><!-- ./card-updates -->
+							
+							<div class="card card-updates can-del">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<span>Service Disabled</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">YouTube Views (S)</h2>
+									</div>
+								</div>
+							</div><!-- ./card-updates -->
+							
+							<div class="card card-updates can-add">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<span>Service Added</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">YouTube Views (S)</h2>
+									</div>
+								</div>
+							</div><!-- ./card-updates -->							
+							
+							
+                        </div><!-- tab 2 -->
+					
+                        <div class="tab-pane fade" id="nav-newsR" role="tabpanel" aria-labelledby="nav-newsR-tab">
+                        
+							<div class="card card-announce">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<i class="fab fa-instagram icon"></i>
+											<span>General</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">Create wireframe</h2>
+									</div>
+									<div class="can-body">
+										<div class="can-text">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+										</div>
+									</div>
+								</div>
+							</div><!-- ./card-announce -->
+
+							<div class="card card-announce can-ig">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<i class="fab fa-instagram icon"></i>
+											<span>Instagram</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">Create wireframe</h2>
+									</div>
+									<div class="can-body">
+										<div class="can-text">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+										</div>
+									</div>
+								</div>
+							</div><!-- ./card-announce -->
+							<div class="card card-announce can-tw">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<i class="fab fa-twitter icon"></i>
+											<span>Twitter</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">Create wireframe</h2>
+									</div>
+									<div class="can-body">
+										<div class="can-text">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+										</div>
+									</div>
+								</div>
+							</div><!-- ./card-announce -->
+							<div class="card card-announce can-fb">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<i class="fab fa-facebook-f icon"></i>
+											<span>Facebook</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">Create wireframe</h2>
+									</div>
+									<div class="can-body">
+										<div class="can-text">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+										</div>
+									</div>
+								</div>
+							</div><!-- ./card-announce -->
+
+							<div class="card card-announce can-yt">
+								<div class="can-content">
+									<div class="can-top">
+										<div class="can-cat">
+											<i class="fab fa-youtube icon"></i>
+											<span>Youtube</span>
+										</div>
+										<div class="can-time">
+											<i class="far fa-clock icon"></i>
+											<span>2021-05-10 17:57:01</span>
+										</div>
+									</div>
+									<div class="can-head">
+										<h2 class="can-title">Create wireframe</h2>
+									</div>
+									<div class="can-body">
+										<div class="can-text">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+										</div>
+									</div>
+								</div>
+							</div><!-- ./card-announce -->
+						
+
+                        </div><!-- tab-content -->				
+						
+                        <div class="tab-pane fade" id="nav-sssR" role="tabpanel" aria-labelledby="nav-sssR-tab">
+							<div class="faq-ss-tabs">
+                                 <div class="home-ss-tab">
+                                    <div class="ss-tab-head">
+                                       <div class="row">
+                                          <div class="col">
+                                             My Followers Are Dropping What Should I Do?
+                                          </div>
+                                          <div class="col-auto align-self-center right-p">
+                                             <i class="fas fa-plus"></i>
+                                             <i class="fas fa-minus"></i>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="ss-tab-content">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+                                    </div>
+                                 </div>
+                                 <!-- home-ss-tab end -->
+								 
+                                 <div class="home-ss-tab">
+                                    <div class="ss-tab-head">
+                                       <div class="row">
+                                          <div class="col">
+											  API Nedir?
+                                          </div>
+                                          <div class="col-auto align-self-center right-p">
+                                             <i class="fas fa-plus"></i>
+                                             <i class="fas fa-minus"></i>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="ss-tab-content">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+                                    </div>
+                                 </div>
+                                 <!-- home-ss-tab end -->
+								 
+                                 <div class="home-ss-tab">
+                                    <div class="ss-tab-head">
+                                       <div class="row">
+                                          <div class="col">
+                                             How can I add Funds ?
+                                          </div>
+                                          <div class="col-auto align-self-center right-p">
+                                             <i class="fas fa-plus"></i>
+                                             <i class="fas fa-minus"></i>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    <div class="ss-tab-content">
+											Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard.
+                                    </div>
+                                 </div>
+                                 <!-- home-ss-tab end -->
+								 
+                            </div>
+                        </div><!-- tab 3 -->
+                    </div>
+				
+				
+				
+
+                </div><!-- app-rb-body -->
+            </div>
+        </div><!-- rightbar-end -->
+
+
+
+
+
+    </div>
+<div class="bs-toast">
+    <div class="bs-toast-content">
+        <div class="toast-text">Copied Clipboard</div>
+        <button class="toast-times" onclick="removeToast();"><i class="fas fa-times"></i></button>
+    </div>
+</div>
+
+<div class="app-navbar">
+	<div class="row">
+		<div class="col text-center align-self-center">
+			<a href="/">
+				<i class="fal fa-home navbar-icon"></i>
+			</a>
+		</div>
+		<div class="col text-center align-self-center">
+			<a href="/orders" class="active">
+				<i class="fal fa-chart-pie-alt navbar-icon"></i>
+			</a>
+		</div>
+		<div class="col text-center align-self-center">
+			<a href="/">
+				<img src="https://cdn.smmspot.net/sites/smmspot/assets/images/nav-btn.svg" class="navbar-mid-icon" alt="">
+			</a>
+		</div>
+		<div class="col text-center align-self-center">
+			<a href="/tickets">
+				<i class="fal fa-comment-lines navbar-icon"></i>
+			</a>
+		</div>
+		<div class="col text-center align-self-center">
+			<a href="/account">
+				<i class="fal fa-cog navbar-icon"></i>
+			</a>
+		</div>
+	</div>
+</div>
+  
+{% else %}  
+    <footer class="smmspot-na-footer">
+        <div class="smmspot-ftop">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-auto text-center text-md-start mb-4 mb-md-0">
+                        <a href="/">
+                        {% if site['logo'] %}
+                          <img src="{{ site['logo'] }}" alt="{{ site['name'] }}" width="190" title="{{ site['name'] }}">
+                        {% else %}
+                          {{ site['name'] }}
+                        {% endif %}
+                        </a>
+					</div>
+					<div class="col-md mt-4 mt-md-0 text-lg-end text-md-end text-center">
+						<ul class="smmspot-fmenu">
+                          <li><a href="/services">Services</a></li>
+                          <li><a href="/terms">Terms</a></li>
+                          <li><a href="https://t.me/smmcrazy_contacts/3">Contacts</a></li>
+                          <li><a href="/api">API</a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+        </div>
+		<div class="smmspot-fbot text-center">
+			<div class="container">
+				<div class="row">
+					<div class="smmspot-fb-title mb-5">
+						<h3>Become popular in social networks today?</h3>
+					</div>
+					
+					<div class="smmspot-fb-btn d-flex justify-content-center mb-5">
+                       <div class="row">
+                           <div class="col-md-auto col-12 mb-4 mb-lg-0">
+                             <a href="/services" class="btn btn-secondary btn-border btn-block">
+                                   See Services
+                                </a>
+                           </div>
+                           <div class="col-md-auto col-12">
+                             <a href="/signup" class="btn btn-primary btn-border btn-block">
+                                    Register
+                                </a>
+                           </div>
+                         </div>						
+					</div>
+					
+					<div class="smmspot-fb-copy">
+						© Copyright 2022 | SMMCRAZY | All Rights Reserved
+					</div>
+				</div>
+			</div>
+		</div>
+    </footer><!-- ./footer -->
+
+{% endif %}
+  
+	
+	
+<script src="https://cdn.smmspot.net/sites/smmspot/assets/knd/js/selectbox.js"></script>
+  
+								<script>
+								  function HideEverything(){
+									$('.ordernumbers').hide();
+									$('.transactionid').hide();
+								  }
+								  $(document).ready(function(){
+								  $('.subject').change(function(){
+										HideEverything();		
+										if($(this).val()=='Sipariş'){
+											$('.ordernumbers').show();
+											$('#requestRefill').prop('checked',true);
+											$('#paymentPaypal').prop('checked',false);
+										}  		
+										if($(this).val()=='Ödeme'){
+											$('.transactionid').show();
+											$('#paymentPaypal').prop('checked',true);
+											$('#requestRefill').prop('checked',false);
+										}
+									});
+									$('#submit').click(function(e){
+										e.preventDefault();
+										console.log('working');
+										$TheSubject = $('.subject:checked').val();
+										$TheRequest = $('.second-options:checked').val();
+										if ($TheSubject == 'Sipariş'){
+											$final = 'Sipariş No: ' + $('#ordernumbers').val() + '\n\n' + $('#message').val();
+										}else if($TheSubject == 'Ödeme'){
+											$final = 'Ödeme No:' +  $('#transactionid').val() +'\n\n' + $('#message').val();
+											
+										}else{
+											$final = $('#message').val();
+										}
+										$('#alldata').val($final);
+										$('.subject:checked').val($TheSubject);
+										//submit
+										$('#submit').submit();
+									});
+								  });
+								</script>
+  
+
+
+<script>
+    $(window).bind('load', function()
+    {
+        $("div#order_link").html('' +
+            '<div class="fga mb-4">' +
+            '<label class="fla" for="orderLink">{{ lang('neworder.link') }}</label>' +
+            '<div class="fg">' +
+            '<div class="fg-icon"><i class="fad fa-link"></i></div>' +
+            '<input class="fg-control" name="OrderForm[link]" value="" type="text" id="field-orderform-fields-link">' +
+            '</div>' +
+			'</div>');
+
+        $("div#order_quantity").html('' +
+            '<div class="fga mb-4">' +
+            '<label class="fla" for="orderQuantitiy">{{ lang('neworder.quantity') }}</label>' +
+            '<div class="fg">' +
+            '<div class="fg-icon"><i class="fad fa-sort-numeric-up-alt"></i></div>' +
+            '<input class="fg-control" name="OrderForm[quantity]" value="" type="number" id="field-orderform-fields-quantity">' +
+            '</div>' +
+			'</div>');
+   
+        $("div#order_phone").html('' +
+            '<div class="fga mb-4">' +
+            '<label class="fla" for="orderQuantitiy">{{ lang('addfunds.phone') }}</label>' +
+            '<div class="fg">' +
+            '<div class="fg-icon"><i class="fad fa-mobile-android-alt"></i></div>' +
+            '<input class="fg-control" name="AddFoundsForm[fields][phone]" value="" type="text" id="field-phone">' +
+            '</div>' +
+			'</div>');
+
+    });
+
+
+</script>
+
+
+</body>
+</html>
+
+  
+
+{% for script in site['scripts'] %}
+  <script type="text/javascript" {% if script['src'] %}src="{{ script['src'] }}"{% endif %}>
+    {% if script['code'] %} {{ script['code'] }} {% endif %}
+  </script>
+{% endfor %}
+<!-- Custom Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+
+<!-- CounterUp -->
+  <script>
+	$('.counter').counterUp({
+        delay: 10,
+        time: 500
+    });
+  </script>
+  
+
+<!-- <script>
+var hash = location.hash;
+var loginModal = new bootstrap.Modal(document.getElementById('login'));
+
+if (loginModal) {
+  document.getElementById('login').addEventListener('hide.bs.modal', (event) => {
+    setTimeout(function(){
+      history.replaceState("", document.title, window.location.pathname);
+    }, 1);
+  });
+
+  document.getElementById('login').addEventListener('show.bs.modal', event => {
+    window.location.hash = 'login';
+  })
+
+}
+
+if(hash === '#login') {
+  loginModal.show();
+}
+  
+</script> -->
+
+
+<script>
+
+function getUrlParameter(sParam) {
+    var sPageURL = decodeURIComponent(window.location.search.substring(1));
+    var sURLVariables = sPageURL.split('&');
+    var sParameterName;
+    var i;
+    for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+        if (sParameterName[0] === sParam) {
+            return sParameterName[1] === undefined ? true : sParameterName[1];
+        }
+    }
+}
+
+  
+
+var select_service_id = getUrlParameter("select_service_id");
+if (select_service_id) {
+    var selectSerCatID = window.modules.siteOrder.services[select_service_id].cid;
+  	let orderCat = document.getElementById('orderform-category');
+  	let orderSer = document.getElementById('orderform-service');
+	
+    $(function () {
+        orderCat.querySelector('[selected]').removeAttribute('selected');
+        console.log(selectSerCatID);
+        orderCat.querySelector('[value="'+ selectSerCatID +'"]').setAttribute('selected', 'selected');
+        orderCat.value = selectSerCatID;
+
+        var event = document.createEvent('HTMLEvents');
+        event.initEvent('change', true, false);
+        orderCat.dispatchEvent(event);
+
+        setTimeout(() => {
+            let controlSel = orderSer.querySelector('[selected]')
+            if (controlSel) {
+                controlSel.removeAttribute('selected');
+            }
+            console.log(select_service_id);
+            orderSer.querySelector('[value="'+ select_service_id +'"]').setAttribute('selected', 'selected');
+            orderSer.value = select_service_id;
+            orderSer.dispatchEvent(event);
+
+        }, 500);
+    });
+}
+</script>
+
+		<script>
+    	// On page load set the theme.
+        (function() {
+          let onpageLoad = localStorage.getItem("theme") || "";
+          let element = document.body;
+          element.classList.add(onpageLoad);
+        })();
+
+        function themeToggle() {
+          let element = document.body;
+          element.classList.toggle("light-mode");
+
+          let theme = localStorage.getItem("theme");
+          if (theme && theme === "light-mode") {
+            localStorage.setItem("theme", "");
+          } else {
+            localStorage.setItem("theme", "light-mode");
+          }
+        }
+      </script>
+
+      <script>
+          // On page load set the theme.
+          (function() {
+            let onpageLoad = localStorage.getItem("fundn") || "";
+            let navfund = document.getElementById('navfund');
+            navfund.classList.add(onpageLoad);
+          })();
+
+          function fundNavtog() {
+            let navfund = document.getElementById('navfund');
+            navfund.classList.toggle("hiddenfu");
+
+            let fundn = localStorage.getItem("fundn");
+            if (fundn && fundn === "hiddenfu") {
+              localStorage.setItem("fundn", "");
+            } else {
+              localStorage.setItem("fundn", "hiddenfu");
+            }
+          }
+        </script>
+
+	  <script>
+    	// On page load set the theme.
+        (function() {
+          let onpageLoad = localStorage.getItem("fundv") || "";
+          let fund = document.getElementById('fund');
+          fund.classList.add(onpageLoad);
+        })();
+
+        function fundToggle() {
+          let fund = document.getElementById('fund');
+          fund.classList.toggle("hiddenf");
+
+          let fundv = localStorage.getItem("fundv");
+          if (fundv && fundv === "hiddenf") {
+            localStorage.setItem("fundv", "");
+          } else {
+            localStorage.setItem("fundv", "hiddenf");
+          }
+        }
+      </script>

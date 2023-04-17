@@ -1,0 +1,333 @@
+<style>
+  #order_min{
+    display: block !important;
+    position: relative;
+  }
+  
+  #order_min label{
+    display: none;
+  }
+  
+  .fg small.help-block.min-max{
+    display: none !important;
+  }
+  
+  #order_count{
+    display: none;
+  }
+</style>
+
+<main class="app-main">
+    <div class="page-content">
+        <div class="container-fluid">
+		
+          <!-- {% if user['unread_ticket'] > 0 %} 
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="alert alert-notify fade show" role="alert">
+						<div class="t-notify th-3">
+							<div class="row align-items-center">
+								<div class="col-md-auto">
+									<div class="t-icon">
+										<i class="fal fa-bullhorn"></i>
+									</div>
+								</div>
+								<div class="col-md col-12">
+                                  <p><strong>You have unread. {{ user['unread_ticket'] }} tickets </strong></p>
+								</div>
+								<div class="col-md-auto">
+                                  <a href="/tickets" type="button" class="btn btn-dark">Read Now !</a>
+								</div>
+								<div class="col-md-auto" style="text-align:right">
+									<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+								</div>
+							</div>
+						</div>					
+					</div>
+				</div>
+			</div>
+          {% endif %} -->
+		
+            <div class="row mb-4">
+                <div class="col-lg-12">
+					<div class="card">
+						<div class="py-4 px-lg-3 px-4">
+							<div class="row">
+								<div class="col-xl-4 col-md-4">
+									<div class="top-card br">
+										<div class="row align-items-center">
+											<div class="col-auto">
+												<div class="cnb-circle levelcirc">
+													<img src="https://i.imgur.com/FmSIScf.png">
+												</div>
+											</div><!-- ./col -->
+											<div class="col">
+												<h2>Total Orders</h2>
+												<h3>{{totals['ordersAll']}}</h3>
+											</div>
+										</div>
+									</div>
+								</div>
+								
+								<div class="col-xl-4 col-md-4">
+									<div class="top-card br">
+										<div class="row align-items-center">
+											<div class="col-auto">
+												<div class="cnb-circle levelcirc">
+													<img src="https://i.imgur.com/MovqaX1.png">
+												</div>
+											</div><!-- ./col -->
+											<div class="col">
+												<h2>Spent on orders</h2>
+												<h3>{{user['spent']}}</h3>
+											</div>
+										</div>
+                                    </div>
+								</div>
+								
+								<div class="col-xl-4 col-md-4">
+									<div class="top-card">
+										<div class="row align-items-center">
+											<div class="col-auto">
+												<a href="/dashboard"><div class="cnb-circle levelcirc">
+                                                  {% if user['spent'] >= 5000 %} <img src="https://i.imgur.com/LvU1J8j.png"> {% elseif user['spent'] >= 2000 %} <img src="https://i.imgur.com/FCkiKXG.png"> {% elseif user['spent'] >= 500 %} <img src="https://i.imgur.com/s0cFpaN.png"> {% else %} <img src="https://i.imgur.com/AaDiGTk.png"> {% endif %}
+                                                  </div></a>
+											</div><!-- ./col -->
+											<div class="col">
+												<h2>Account status</h2>
+                                              	<h3>{% if user['spent'] >= 5000 %} Diamond {% elseif user['spent'] >= 2000 %} Gold {% elseif user['spent'] >= 500 %} Silver {% else %} Bronze {% endif %}</h3>
+											</div>
+										</div>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <div class="card mb-5">
+                        <div class="py-4 px-lg-3 px-4">
+						
+									<div class="t-head th-3">
+										<div class="row align-items-center">
+											<div class="col-md-auto">
+												<div class="t-icon">
+													<i class="fad fa-hand-holding-box"></i>
+												</div>
+											</div>
+											<div class="col-md col-12">
+												<h2>Create order</h2>
+												<p>On this page you can create an order</p>
+											</div>
+										</div>
+									</div>
+									
+									<form {% if site['rtl'] %} class="rtl-form"{% endif %} action="{{ page['url'] }}" method="post" id="order-form">
+											  {% if error %}
+												<div class="alert alert-dismissible alert-danger {% if site['rtl'] %} rtl-alert {% endif %}">
+												  <button type="button" class="close" data-dismiss="alert">&times;</button>
+												  {{ errorMessage }}
+												</div>
+											  {% endif %}
+
+											  {% if 1 == success %}
+												<div class="alert alert-success alert-dismissible" role="alert">
+												  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												  <h4>{{lang('neworder.message.success')}}</h4>
+												  {{lang('neworder.id')}}: {{order['id']}}<br>
+												  {{lang('neworder.service')}}: {{order['service']}}
+												  <br>
+												  {{lang('neworder.link')}}: {{order['link']}}<br>
+												  {{lang('neworder.quantity')}}: {{order['quantity']}}<br>
+												  {{lang('neworder.charge')}}: {{order['charge']}}<br>
+												  {{lang('neworder.balance')}}: {{order['balance']}}<br>
+												</div>
+											  {%endif%}
+
+											  {% if 2 == success %}
+												<div class="alert alert-success alert-dismissible" role="alert">
+												  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+												  <h4>{{lang('neworder.message.success')}}</h4>
+												  {{lang('neworder.subscription_id')}}: {{order['id']}}<br>
+												  {{lang('neworder.service')}}: {{order['service']}}
+												  <br>
+												  {{lang('neworder.username')}}: {{order['link']}}<br>
+												  {{lang('neworder.quantity')}}:
+												  {% if order['quantity_min'] == order['quantity_max'] %}
+												  {{order['quantity_max']}}
+												  {%else%}
+													{{order['quantity_min']}}-{{order['quantity_max']}}
+												  {%endif%}
+												  <br>
+												  {{lang('neworder.new_posts')}}:
+												  {% if 0 == order['posts'] %}
+													&#8734;
+												  {% else %}
+													{{order['posts']}}
+												  {%endif%}
+												  <br>
+												  {{lang('neworder.delay')}}:
+												  {{order['delay']}}
+												  <br>
+												</div>
+											  {%endif%}
+
+										{% if categories %}		
+                                        <div class="fga mb-4">
+                                            <label class="fla" for="orderCategory">{{ lang('neworder.category') }}</label>
+                                            <div class="fg">
+                                                <div class="fg-icon"><i class="fad fa-list"></i></div>
+                                                <select id="orderform-category" name="OrderForm[category]" class="fg-control" data-toggle="ssp-selectbox" data-class="fg-control">
+													 {% for categoryId,categoryName in categories %}
+													 <option value="{{ categoryId }}" {% if categoryId == data['category'] %} selected {%endif%}>{{ categoryName }}</option>
+													 {%endfor%}
+                                                </select>
+                                            </div>
+                                        </div>
+										{% endif %}
+        
+                                        <div class="fga mb-4">
+                                            <label class="fla" for="orderService">{{ lang('neworder.service') }}</label>
+                                            <div class="fg">
+                                                <div class="fg-icon"><i class="fad fa-boxes"></i></div>
+                                                <select name="OrderForm[service]" id="orderform-service" class="fg-control" data-toggle="ssp-selectbox" data-class="fg-control">
+                                                </select>
+                                            </div>
+                                        </div>
+        
+                                      <div id="fields"></div>
+										
+									  {% if check_agreement %}
+										<div class="form-group">
+										  <label class="control-label terms">
+											<input type="checkbox"  name="OrderForm[termsofservice]" class="terms-accept-checkbox" value="1" id="terms" {{data['termsofservice'] ? 'checked' : ''}}> {{lang('signup.accept_terms_text')}}
+											<a  href="{{ page_url('terms') }}" target="_blank">{{ lang('terms.terms_of_service') }}</a>
+										  </label>
+										</div>
+									  {%endif%}
+        
+                                        <div class="row">
+                                          	<div class="col-md-6 col-12 mb-4 mb-mb-0 form-group">
+                                                <div class="fg">
+                                                  	<div class="fg-icon"><i class="fad fa-money-bill"></i></div>
+                                                    <input type="text" class="fg-control" id="charge" value="{{ order['charge'] }}" readonly placeholder="Total">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-12 mb-4 mb-mb-0">
+                                                  <input type="hidden" name="_csrf" value="{{ csrftoken }}">
+                                                  <button type="submit" class="btn btn-primary btn-block">
+                                                      {{ lang('neworder.button') }}
+                                                  </button>
+                                            </div>
+                                        </div>
+                                    </form>
+                        </div>
+                    </div><!-- card -->
+                </div><!-- col -->
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="py-4 px-lg-3 px-4">
+									<div class="t-head th-3">
+										<div class="row align-items-center">
+											<div class="col-md-auto">
+												<div class="t-icon">
+													<i class="fad fa-comment-alt-medical"></i>
+												</div>
+											</div>
+											<div class="col-md col-12">
+												<h2>Service Description</h2>
+												<p><span id="s_name"></span></p>
+											</div>
+										</div>
+									</div>
+									
+                                    <div class="dp-service-text">
+										<span id="s_desc"></span>
+                                    </div>
+                                    <div class="card mt-4">
+                                        <div class="cb-content">
+                                            <div class="card-body">
+                                                <div class="row text-center align-items-center">
+                                                    <div class="col">
+                                                        <div class="text-muted">
+                                                           When you place an order, you are deemed to have accepted the <a href="/terms">Terms of Use</a>.
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                       
+                        </div>
+                    </div>
+                  	<div class="card cntctcard">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div aria-labelledby="nav-updatesR-tab" class="tab-pane fade active show" id="cntctus" role="tabpanel">
+                                <div class="py-4 px-lg-3 px-4">
+                                    <div class="row">
+                                      <div class="col-md-12">
+                                          <a class="btn btn-primary naubtn">
+                                            <i class="fas fa-newspaper"></i> NEWS &amp; UPDATES
+                                        </a>
+                                      </div>
+                                      
+                                        <div class="col-md-6">
+                                            <a class="clrwht" href="" target="_blank">
+                                              <div class="top-card cntctcard br">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="cnb-circle levelcirc cntct wpic"><i class="fab fa-whatsapp"></i></div>
+                                                    </div><!-- ./col -->
+                                                    <div class="col">
+                                                        <h2>WhatsApp</h2>
+                                                        <h3>Temporarily unavailable</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          	</a>
+                                        </div>
+                                      	<div class="col-md-6">
+                                          <a class="clrwht" href="https://t.me/smmcrazy_supp" target="_blank">
+                                            <div class="top-card cntctcard br">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="cnb-circle levelcirc cntct tgic"><i class="fab fa-telegram-plane"></i></div>
+                                                    </div><!-- ./col -->
+                                                    <div class="col">
+                                                        <h2>Telegram</h2>
+                                                        <h3>@smmcrazy_supp</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          </a>
+                                        </div>
+                                        <div class="col-md-6">
+                                          <a class="clrwht" href="https://join.skype.com/invite/FsfKxPnsB9Mi" target="_blank">
+                                            <div class="top-card cntctcard br">
+                                                <div class="row align-items-center">
+                                                    <div class="col-auto">
+                                                        <div class="cnb-circle levelcirc cntct skic"><i class="fab fa-skype"></i></div>
+                                                    </div><!-- ./col -->
+                                                    <div class="col">
+                                                        <h2>Skype</h2>
+                                                        <h3>live:.cid.c91a32eed59e653e</h3>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div><!-- tab 2 -->
+                            <div aria-labelledby="nav-newsR-tab" class="tab-pane fade" id="newz" role="tabpanel"></div><!-- tab-content -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
